@@ -38,8 +38,6 @@
         "nodemon": "^2.0.20"
     },
     "devDependencies": {
-        "morgan": "^1.10.0",
-        "nodemon": "^2.0.20",
         "sequelize-cli": "^6.5.2"
     }
 }
