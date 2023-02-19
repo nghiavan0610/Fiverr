@@ -1,5 +1,5 @@
 const redis = require('redis');
-const config = require('../config/env');
+const config = require('./env');
 
 const redisClient = config.NODE_ENV === 'production' ? redis.createClient(config.REDIS_URL) : redis.createClient();
 

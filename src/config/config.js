@@ -10,7 +10,6 @@ module.exports = {
         // logging: true,
     },
     production: {
-        use_env_variable: config.DB_URL,
         username: config.DB_USER,
         password: config.DB_PASSWORD,
         database: config.DB_NAME,
