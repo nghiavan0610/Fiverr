@@ -4,7 +4,6 @@
     "description": "",
     "main": "src/index.js",
     "scripts": {
-        "build": "npm install",
         "start": "node src/index.js",
         "dev": "nodemon src/index.js",
         "migrate:up": "npx sequelize-cli db:migrate",
@@ -34,7 +33,9 @@
         "passport-jwt": "^4.0.1",
         "redis": "^4.5.1",
         "sequelize": "^6.28.0",
-        "sequelize-slugify": "^1.6.2"
+        "sequelize-slugify": "^1.6.2",
+        "morgan": "^1.10.0",
+        "nodemon": "^2.0.20"
     },
     "devDependencies": {
         "morgan": "^1.10.0",
