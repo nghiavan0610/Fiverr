@@ -13,6 +13,7 @@ const config = {
     DB_PORT: process.env.DB_PORT,
     DB_DIALECT: process.env.DB_DIALECT,
     DB_NAME: process.env.DB_NAME,
+    DB_URL: process.env.DB_URL,
 
     REDIS_USER: process.env.REDIS_USER,
     REDIS_PASSWORD: process.env.REDIS_PASSWORD,
