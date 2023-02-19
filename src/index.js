@@ -22,5 +22,5 @@ app.use(express.json());
 route(app);
 
 app.listen(config.PORT || 3000, () => {
-    console.log(`Aapp listening on port ${config.PORT || 3000}`);
+    console.log(`App listening on port ${config.PORT || 3000}`);
 });
