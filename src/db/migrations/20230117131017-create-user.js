@@ -22,7 +22,7 @@ module.exports = {
                         },
                     },
                     email: {
-                        allowNull: false,
+                        // allowNull: false,
                         type: Sequelize.STRING,
                         validate: {
                             isEmail: {
@@ -31,7 +31,7 @@ module.exports = {
                         },
                     },
                     password: {
-                        allowNull: false,
+                        // allowNull: false,
                         type: Sequelize.STRING,
                         set(value) {
                             if (value.length >= 8 && value.length <= 20) {

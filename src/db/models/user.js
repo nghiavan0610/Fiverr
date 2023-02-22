@@ -119,7 +119,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             email: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                // allowNull: false,
                 unique: true,
                 validate: {
                     isEmail: {
@@ -129,7 +129,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             password: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                // allowNull: false,
                 set(value) {
                     if (value.length >= 8 && value.length <= 20) {
                         const hashedPassword = bcrypt.hashSync(value, 10);
@@ -220,6 +220,8 @@ module.exports = (sequelize, DataTypes) => {
                 },
             },
             avatarUrl: DataTypes.STRING,
+            facebook_id: DataTypes.STRING,
+            google_id: DataTypes.STRING,
             slug: {
                 type: DataTypes.STRING,
                 unique: true,

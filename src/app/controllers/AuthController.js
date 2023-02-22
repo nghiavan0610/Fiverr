@@ -49,8 +49,15 @@ class AuthController {
     // [GET] /api/auth/signout
     async signout(req, res, next) {
         try {
-            await deleteToken(req.jti);
-            res.cookie('jwt', '', { maxAge: '1' });
+            if (req.jti) {
+                await deleteToken(req.jti);
+                res.cookie('jwt', '', { maxAge: '1' });
+            } else {
+                req.logout((err) => {
+                    return next(err);
+                });
+            }
+
             res.status(200).json(response(`You've been logged out`));
         } catch (err) {
             next(err);

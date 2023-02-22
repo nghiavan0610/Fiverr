@@ -7,7 +7,7 @@ const redisClient =
 (async () => {
     try {
         await redisClient.connect();
-        console.log('Connection to Redis has been established successfully.');
+        console.log(`Connection to Redis with port='${config.REDIS_PORT}' has been established successfully.`);
     } catch (err) {
         console.error('Unable to connect to Redis:', err);
     }

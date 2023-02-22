@@ -25,6 +25,13 @@ const config = {
     CLOUDINARY_SECRET: process.env.CLOUDINARY_SECRET,
 
     SESSION_SECRET: process.env.SESSION_SECRET,
+    FACEBOOK_APP_ID: process.env.FACEBOOK_APP_ID,
+    FACEBOOK_APP_SECRET: process.env.FACEBOOK_APP_SECRET,
+    FACEBOOK_CALLBACK_URL: process.env.FACEBOOK_CALLBACK_URL,
+
+    GOOGLE_APP_ID: process.env.GOOGLE_APP_ID,
+    GOOGLE_APP_SECRET: process.env.GOOGLE_APP_SECRET,
+    GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL,
 };
 
 module.exports = config;

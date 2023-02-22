@@ -1,11 +1,15 @@
 const config = require('../config/env');
 const { ApiError } = require('../helpers/ErrorHandler');
 const { jwtr } = require('../helpers/Token');
+const passport = require('passport');
 
 const { User } = require('../db/models');
 
 const requireAuth = async (req, res, next) => {
     try {
+        if (req.isAuthenticated()) {
+            return next();
+        }
         if (!req.cookies.jwt) {
             throw new ApiError(401, 'Token not found');
         }
