@@ -20,6 +20,13 @@ app.use(morgan('combined'));
 // Cookie
 app.use(cookieParser());
 
+app.use(
+    express.urlencoded({
+        extended: true,
+    }),
+);
+app.use(express.json());
+
 // Session
 app.use(
     session({
@@ -31,13 +38,6 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(
-    express.urlencoded({
-        extended: true,
-    }),
-);
-app.use(express.json());
 
 // Route init
 route(app);
