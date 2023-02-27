@@ -37,7 +37,7 @@
 									"urlencoded": [
 										{
 											"key": "email",
-											"value": "user1@gmail.com",
+											"value": "admin@gmail.com",
 											"description": "{Required}",
 											"type": "text"
 										},
@@ -59,7 +59,8 @@
 										"auth",
 										"signin"
 									]
-								}
+								},
+								"description": "Acc user: user\\[2-10\\]@gmail.com / p@ssword\n\nAcc admin: admin@gmail.com / p@ssword\n\nAcc seller: user\\[11-25\\]@gmail.com / p@ssword"
 							},
 							"response": []
 						},
@@ -297,7 +298,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/api/gigs?sub_category&seller_location=&gig_range_price&page=&limit=&filter=",
+											"raw": "{{baseUrl}}/api/gigs?sub_category=&seller_location=&gig_range_price=1,1000&page=&limit=&filter=",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -308,7 +309,7 @@
 											"query": [
 												{
 													"key": "sub_category",
-													"value": null,
+													"value": "",
 													"description": "{Optional} id"
 												},
 												{
@@ -318,7 +319,7 @@
 												},
 												{
 													"key": "gig_range_price",
-													"value": null,
+													"value": "1,1000",
 													"description": "{Optional} min,max"
 												},
 												{
@@ -2780,225 +2781,7 @@
 					"name": "activities",
 					"item": [
 						{
-							"name": "reviews",
-							"item": [
-								{
-									"name": "Get All Reviews For Item",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [],
-										"body": {
-											"mode": "urlencoded",
-											"urlencoded": [
-												{
-													"key": "tag_type",
-													"value": "GIG",
-													"description": "{Required} GIG - SELLER",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{baseUrl}}/api/activities/:tag_slug/reviews",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"api",
-												"activities",
-												":tag_slug",
-												"reviews"
-											],
-											"variable": [
-												{
-													"key": "tag_slug",
-													"value": "gig-research-associate",
-													"description": "{Required}"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Get Review By Id",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.environment.set(\"review_id\", pm.response.json().data.id)",
-													"pm.environment.set(\"review_content\", pm.response.json().data.content)",
-													"pm.environment.set(\"review_rating\", pm.response.json().data.rating)",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [],
-										"body": {
-											"mode": "urlencoded",
-											"urlencoded": []
-										},
-										"url": {
-											"raw": "{{baseUrl}}/api/activities/reviews/:review_id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"api",
-												"activities",
-												"reviews",
-												":review_id"
-											],
-											"variable": [
-												{
-													"key": "review_id",
-													"value": "",
-													"description": "{Required}"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Review Item",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "urlencoded",
-											"urlencoded": [
-												{
-													"key": "rating",
-													"value": "5",
-													"description": "{Required} 1 - 2 - 3 - 4 - 5",
-													"type": "text"
-												},
-												{
-													"key": "content",
-													"value": "good good",
-													"description": "{Optional}",
-													"type": "text"
-												},
-												{
-													"key": "tag_type",
-													"value": "SELLER",
-													"description": "{Required} GIG - SELLER",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{baseUrl}}/api/activities/:tag_slug/leave-review",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"api",
-												"activities",
-												":tag_slug",
-												"leave-review"
-											],
-											"variable": [
-												{
-													"key": "tag_slug",
-													"value": "user18",
-													"description": "{Required}"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Edit Review Item",
-									"request": {
-										"method": "PUT",
-										"header": [],
-										"body": {
-											"mode": "urlencoded",
-											"urlencoded": [
-												{
-													"key": "review_id",
-													"value": "",
-													"description": "{Required}",
-													"type": "text"
-												},
-												{
-													"key": "rating",
-													"value": "5",
-													"description": "{Required} 1 - 2 - 3 - 4 - 5",
-													"type": "text"
-												},
-												{
-													"key": "content",
-													"value": "test",
-													"description": "{Optional}",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{baseUrl}}/api/activities/reviews/edit",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"api",
-												"activities",
-												"reviews",
-												"edit"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Delete Review Item",
-									"request": {
-										"method": "DELETE",
-										"header": [],
-										"body": {
-											"mode": "urlencoded",
-											"urlencoded": [
-												{
-													"key": "review_id",
-													"value": "",
-													"description": "{Required}",
-													"type": "text"
-												}
-											]
-										},
-										"url": {
-											"raw": "{{baseUrl}}/api/activities/reviews/delete",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"api",
-												"activities",
-												"reviews",
-												"delete"
-											]
-										}
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "items",
+							"name": "save items",
 							"item": [
 								{
 									"name": "Save Item To List",
@@ -3244,6 +3027,224 @@
 											"response": []
 										}
 									]
+								}
+							]
+						},
+						{
+							"name": "reviews",
+							"item": [
+								{
+									"name": "Get All Reviews For Item",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "tag_type",
+													"value": "GIG",
+													"description": "{Required} GIG - SELLER",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/activities/:tag_slug/reviews",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"activities",
+												":tag_slug",
+												"reviews"
+											],
+											"variable": [
+												{
+													"key": "tag_slug",
+													"value": "gig-research-associate",
+													"description": "{Required}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Review By Id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.environment.set(\"review_id\", pm.response.json().data.id)",
+													"pm.environment.set(\"review_content\", pm.response.json().data.content)",
+													"pm.environment.set(\"review_rating\", pm.response.json().data.rating)",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/activities/reviews/:review_id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"activities",
+												"reviews",
+												":review_id"
+											],
+											"variable": [
+												{
+													"key": "review_id",
+													"value": "",
+													"description": "{Required}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Review Item",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "rating",
+													"value": "5",
+													"description": "{Required} 1 - 2 - 3 - 4 - 5",
+													"type": "text"
+												},
+												{
+													"key": "content",
+													"value": "good good",
+													"description": "{Optional}",
+													"type": "text"
+												},
+												{
+													"key": "tag_type",
+													"value": "SELLER",
+													"description": "{Required} GIG - SELLER",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/activities/:tag_slug/leave-review",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"activities",
+												":tag_slug",
+												"leave-review"
+											],
+											"variable": [
+												{
+													"key": "tag_slug",
+													"value": "user18",
+													"description": "{Required}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Edit Review Item",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "review_id",
+													"value": "",
+													"description": "{Required}",
+													"type": "text"
+												},
+												{
+													"key": "rating",
+													"value": "5",
+													"description": "{Required} 1 - 2 - 3 - 4 - 5",
+													"type": "text"
+												},
+												{
+													"key": "content",
+													"value": "test",
+													"description": "{Optional}",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/activities/reviews/edit",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"activities",
+												"reviews",
+												"edit"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Review Item",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "review_id",
+													"value": "",
+													"description": "{Required}",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/activities/reviews/delete",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"activities",
+												"reviews",
+												"delete"
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						}
