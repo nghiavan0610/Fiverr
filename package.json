@@ -38,6 +38,7 @@
         "redis": "^4.5.1",
         "sequelize": "^6.28.0",
         "sequelize-cli": "^6.5.2",
-        "sequelize-slugify": "^1.6.2"
+        "sequelize-slugify": "^1.6.2",
+        "socket.io": "^4.6.1"
     }
 }

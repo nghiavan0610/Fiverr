@@ -143,6 +143,41 @@ class CTAController {
             next(err);
         }
     }
+
+    // [POST] /api/activities/chat
+    async createChat(req, res, next) {
+        try {
+            const { id } = req.user;
+            const { recipient_user_id } = req.body;
+            const conversation = await ctaService.createChat(id, recipient_user_id);
+            res.status(201).json(response(conversation));
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    // [GET] /api/activities/conversations
+    async getAllConversations(req, res, next) {
+        try {
+            const { id } = req.user;
+            const conversations = await ctaService.getAllConversations(id);
+            res.status(200).json(response(conversations));
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    // [GET] /api/activities/conversations/:conversation_id
+    async getConversationById(req, res, next) {
+        try {
+            const { id } = req.user;
+            const { conversation_id } = req.params;
+            const conversation = await ctaService.getConversationById(id, conversation_id);
+            res.status(200).json(response(conversation));
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 module.exports = new CTAController();

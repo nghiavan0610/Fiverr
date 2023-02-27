@@ -99,6 +99,23 @@ module.exports = (sequelize, DataTypes) => {
                 onDelete: 'CASCADE',
                 hooks: true,
             });
+            User.hasMany(models.Conversation, {
+                as: 'Started_User_Conversation',
+                sourceKey: 'id',
+                foreignKey: 'started_by_user_id',
+            });
+            User.hasMany(models.Conversation, {
+                as: 'Recipient_Conversation',
+                sourceKey: 'id',
+                foreignKey: 'recipient_user_id',
+            });
+            User.hasMany(models.Message, {
+                as: 'Sender_Message',
+                sourceKey: 'id',
+                foreignKey: 'sender_id',
+                onDelete: 'CASCADE',
+                hooks: true,
+            });
         }
     }
     User.init(

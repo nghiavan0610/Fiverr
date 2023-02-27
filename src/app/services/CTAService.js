@@ -1,5 +1,5 @@
 const { ApiError } = require('../../helpers/ErrorHandler');
-const { sequelize, User, Gig, List, Order, Collection, Review, Country } = require('../../db/models');
+const { sequelize, User, Gig, List, Order, Collection, Review, Country, Conversation } = require('../../db/models');
 const { Op } = require('sequelize');
 
 class CTAService {
@@ -409,8 +409,8 @@ class CTAService {
                     },
                 },
                 order: [
-                    ['Orders', 'is_done', 'DESC'],
                     ['Orders', 'order_date', 'DESC'],
+                    ['Orders', 'is_done', 'DESC'],
                 ],
             });
             return orders;
@@ -511,6 +511,70 @@ class CTAService {
             if (!deleted) {
                 throw new ApiError(404, `Order with id='${order_id}' was not found`);
             }
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    // [POST] /api/activities/chat
+    async createChat(id, recipient_user_id) {
+        try {
+            const recipient = await User.findByPk(recipient_user_id);
+            if (!recipient) {
+                throw new ApiError(404, `User with id='${recipient_user_id}' was not found`);
+            }
+
+            const [conversation, created] = await Conversation.findOrCreate({
+                where: { started_by_user_id: id, recipient_user_id: recipient.id },
+                include: {
+                    attributes: ['id', 'name', 'avatarUrl', 'slug'],
+                    model: User,
+                    as: 'RecipientUser',
+                },
+                defaults: {},
+            });
+            return conversation;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    // [GET] /api/activities/conversations
+    async getAllConversations(id) {
+        try {
+            const conversations = await Conversation.findAll({
+                where: {
+                    [Op.or]: [{ started_by_user_id: id }, { recipient_user_id: id }],
+                },
+                include: {
+                    attributes: ['id', 'name', 'avatarUrl', 'slug'],
+                    model: User,
+                    as: 'RecipientUser',
+                },
+                order: [['updatedAt', 'DESC']],
+            });
+            return conversations;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    // [GET] /api/activities/conversations/:conversation_id
+    async getConversationById(id, conversation_id) {
+        try {
+            const conversation = await Conversation.findOne({
+                where: {
+                    [Op.or]: [{ started_by_user_id: id }, { recipient_user_id: id }],
+                    [Op.and]: [{ id: conversation_id }],
+                },
+                include: {
+                    attributes: ['id', 'name', 'avatarUrl', 'slug'],
+                    model: User,
+                    as: 'RecipientUser',
+                },
+                order: [['updatedAt', 'DESC']],
+            });
+            return conversation;
         } catch (err) {
             throw err;
         }

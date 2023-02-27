@@ -7,7 +7,7 @@ module.exports = {
         host: config.DB_HOST,
         dialect: config.DB_DIALECT,
         port: config.DB_PORT,
-        logging: false,
+        logging: console.log,
     },
     production: {
         use_env_variable: 'DATABASE_URL',

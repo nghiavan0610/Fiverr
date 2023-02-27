@@ -22,4 +22,8 @@ router.delete('/delete-order-history', requireAuth, ctaController.deleteOrderHis
 router.get('/:user_slug/get-user-deleted-orders', requireAuth, requireRole('admin'), ctaController.getUserDeletedOrder);
 router.delete('/force-delete-order-history', requireAuth, requireRole('admin'), ctaController.forceDeleteOrderHistory);
 
+// chat
+router.post('/chat', requireAuth, ctaController.createChat);
+router.get('/conversations', requireAuth, ctaController.getAllConversations);
+
 module.exports = router;
