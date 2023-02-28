@@ -10,9 +10,9 @@ const requireAuth = async (req, res, next) => {
         if (req.isAuthenticated()) {
             return next();
         }
-        if (!req.cookies.jwt) {
-            throw new ApiError(401, 'Token not found');
-        }
+        // if (!req.cookies.jwt) {
+        //     throw new ApiError(401, 'Token not found');
+        // }
         const { authorization } = req.headers;
 
         if (!authorization || !authorization.startsWith('Bearer')) {

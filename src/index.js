@@ -14,7 +14,9 @@ const server = http.createServer(app);
 
 // Initialize the socket.io server
 // socket.initSocket(server);
+
 app.use(cors());
+
 // HTTP logger
 app.use(morgan('combined'));
 
