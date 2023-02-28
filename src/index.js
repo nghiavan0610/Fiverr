@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const route = require('./routes');
 const session = require('express-session');
 const passport = require('passport');
+const cors = require('cors');
 
 const http = require('http');
 const socket = require('./eventHandler/socket');
@@ -13,7 +14,7 @@ const server = http.createServer(app);
 
 // Initialize the socket.io server
 // socket.initSocket(server);
-
+app.use(cors());
 // HTTP logger
 app.use(morgan('combined'));
 
