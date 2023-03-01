@@ -40,6 +40,8 @@
         "sequelize": "^6.28.0",
         "sequelize-cli": "^6.5.2",
         "sequelize-slugify": "^1.6.2",
-        "socket.io": "^4.6.1"
+        "socket.io": "^4.6.1",
+        "swagger-ui-express": "^4.6.2",
+        "yamljs": "^0.3.0"
     }
 }

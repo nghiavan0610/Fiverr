@@ -7,6 +7,8 @@ const route = require('./routes');
 const session = require('express-session');
 const passport = require('passport');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const yaml = require('yamljs');
 
 const http = require('http');
 const socket = require('./eventHandler/socket');
@@ -41,6 +43,10 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// swagger
+const openapiDocument = yaml.load('./openapi.yaml');
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(openapiDocument));
 
 // Route init
 route(app);
