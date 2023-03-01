@@ -8,8 +8,8 @@ const requireRole = require('../middlewares/RoleMiddleware');
 router.post('/:list_id/save-item', requireAuth, ctaController.saveItemToList);
 
 // review items
-router.get('/:tag_slug/reviews', requireAuth, ctaController.getAllReview);
-router.get('/reviews/:review_id', requireAuth, ctaController.getReviewById);
+router.get('/:tag_slug/reviews', ctaController.getAllReview);
+router.get('/reviews/:review_id', ctaController.getReviewById);
 router.post('/:tag_slug/leave-review', requireAuth, ctaController.createReview);
 router.put('/reviews/edit', requireAuth, ctaController.editReview);
 router.delete('/reviews/delete', requireAuth, ctaController.deleteReview);
